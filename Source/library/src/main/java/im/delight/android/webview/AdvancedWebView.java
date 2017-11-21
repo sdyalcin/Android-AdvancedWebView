@@ -706,6 +706,11 @@ public class AdvancedWebView extends WebView {
 			@SuppressWarnings("all")
 			public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
 				if (Build.VERSION.SDK_INT >= 21) {
+
+					if (mCustomWebChromeClient != null) {
+						mCustomWebChromeClient.onFileChooser(webView,filePathCallback,fileChooserParams);
+					}
+
 					final boolean allowMultiple = fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
 
 					openFileInput(null, filePathCallback, allowMultiple);
